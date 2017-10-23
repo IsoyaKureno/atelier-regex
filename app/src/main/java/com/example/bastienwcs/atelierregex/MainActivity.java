@@ -1,5 +1,4 @@
 package com.example.bastienwcs.atelierregex;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.regex.Pattern;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+public class MainActivity extends AppCompatActivity {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -22,29 +21,25 @@ public class MainActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isNameOk = false;
-                // TODO: check Name here
+                boolean isNameOk = Pattern.matches("(\\b[A-Z][a-z]+[ -]?)+",name.getText().toString());
 
                 if (!isNameOk) {
                     name.setError(getResources().getString(R.string.error_name));
                 }
 
-                boolean isAgeOk = false;
-                // TODO: check Age here
+                boolean isAgeOk = Pattern.matches("[0-9]{1,3}",age.getText().toString());
 
                 if (!isAgeOk) {
                     age.setError(getResources().getString(R.string.error_age));
                 }
 
-                boolean isAddressOk = false;
-                // TODO: check Address here
+                boolean isAddressOk = Pattern.matches("[0-9][ ][a-zA-Z ]*,[0-9]{5}[ ][A-Z][a-z]+",address.getText().toString());
 
                 if (!isAddressOk) {
                     address.setError(getResources().getString(R.string.error_address));
                 }
 
-                boolean isEmailOk = false;
-                // TODO: check Email here
+                boolean isEmailOk = Pattern.matches("[0-9a-zA-Z._-]+@[0-9a-zA-Z]+([.][0-9a-zA-Z]{1,3})+",email.getText().toString());
 
                 if (!isEmailOk) {
                     email.setError(getResources().getString(R.string.error_email));
